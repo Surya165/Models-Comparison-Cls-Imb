@@ -53,7 +53,7 @@ def labeller(d_list,c_list):
 			label_list[prev_index][1] = 1
 			mitotic_list.append(label_list[prev_index][0])
 			removableList.append(label_list[prev_index][0])
-			print(str(label_list[prev_index][0]) + "->" + str(label_list[prev_index][1]) + " given centroid " , (a,b) , " distance " , prev)
+			#print(str(label_list[prev_index][0]) + "->" + str(label_list[prev_index][1]) + " given centroid " , (a,b) , " distance " , prev)
 
 	#print("removableList",removableList)
 	dummy_list = []

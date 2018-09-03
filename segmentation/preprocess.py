@@ -83,17 +83,17 @@ def otsu(img):
   th = filters.threshold_otsu(img)
   return th
 def preprocess(img):
-    print("Creating Blue Ratio Histogram")
+    #print("Creating Blue Ratio Histogram")
     img = blueRatioHistogram(img)
     cv.imwrite('brh.jpg',img)
-    print("Calculating Otsu Threshold")
+    #print("Calculating Otsu Threshold")
     threshold = otsu(img)
-    print('Global Thresholding')
+    #print('Global Thresholding')
     img = globalThreshold(img,threshold)
     kernel = np.ones((3,3), np.uint8)
     img = img* 1.0
     img = img.astype(np.float32)
-    print("Morphological operations")
+    #print("Morphological operations")
     img = cv.dilate(img,kernel,iterations=1)
     img = cv.erode(img, kernel, iterations=3)
 

@@ -71,67 +71,30 @@ def floodFill(img,i,j,visited,recursionCount,blob):
 	if count == 0:
 		return
 	return
-
-
-def segment(imageName):
-	img = cv2.imread(imageName)
-	#print('in preprocess')
-	img = preprocess.preprocess(img)
-	cv2.imwrite("image.jpg",img)
-
-
-	'''a = img.shape[0]
-	b = img.shape[1]
-	#blob detection\
-	#print(numpy.amax(img))
-	#print(a,b)
-	visited = numpy.zeros((a,b))
-	blobsList = []
-	count = 0
-
-	for i in range(1,a-1):
-		for j in range(1,b-1):
-			t = str(a*(i-1)+j)+"/"+str(a*b)
-			#t = round((float(i*j)/float(a*b))*100)/100
-			print(t+"% completed")
-
-			delete_last_lines(1)
-			if visited[i][j] == 0 and img[i][j] > 0:
-				#count += 1
-				#print("flood filling blob no. "+str(count))
-				blob = []
-				visited[i][j] = 1
-				floodFill(img,i,j,visited,0,blob)
-				if(len(blob) > 100):
-					blobsList.append(blob)
-					count += 1'''
-	t2 = time()
-	img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+def blobDetector(img):
 	params = cv2.SimpleBlobDetector_Params()
 	params.filterByConvexity = False
-	params.filterByInertia = True
-	params.minInertiaRatio = 0.4
+	params.filterByInertia = False
+	params.minInertiaRatio = 0.001
 	params.filterByArea = True
 	params.minArea = 15
 	params.filterByColor = True
 	params.blobColor = 255
-	# Set up the detector with default parameters.
 	detector = cv2.SimpleBlobDetector_create(params)
 	# Setup SimpleBlobDetector parameters.
 
 	# Detect blobs.
 	blobsList = []
-	print(type(img))
+	#print(type(img))
 	keypoints = detector.detect(img)
-	t2 = time() - t2
-	print(str(t2)+"secs")
+	#print(str(t2)+"secs")
 	blobsList = keypoints
-	print("keypoints",len(keypoints))
+	#print("keypoints",len(keypoints))
 	im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 	# Show keypoints
 	bloblist = []
 	cv2.imwrite("Keypoints.jpg", im_with_keypoints)
-	print(len(keypoints))
+	#print(len(keypoints))
 	for i in range(len(keypoints)):
 		pt = keypoints[i].pt;
 		x = pt[1]
@@ -144,7 +107,20 @@ def segment(imageName):
 
 	b = len(blobsList)
 	blobsList = blobsList[round(b/2):b]
-	print(len(blobsList))
+	return blobsList
+
+def segment(imageName):
+	img = cv2.imread(imageName)
+	#print('in preprocess')
+	img = preprocess.preprocess(img)
+	cv2.imwrite("image.jpg",img)
+
+	t2 = time()
+	img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+	blobsList = blobDetector(img)
+	# Set up the detector with default parameters.
+
+	#print(len(blobsList))
 	#cv2.waitKey(0)
 	#import numpy as np
 	#pts = np.float([keypoints[idx].pt for idx in len(keypoints)]).reshape(-1, 1, 2)
