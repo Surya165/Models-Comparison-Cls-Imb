@@ -6,7 +6,7 @@ from math import floor
 sys.path.append('..')
 from segmentation import segment
 from segment import segment
-
+from pickleCreator import create_pickle
 CURSOR_UP_ONE = '\x1b[1A'
 ERASE_LINE = '\x1b[2K'
 def delete_last_lines(n=1):
@@ -43,10 +43,16 @@ for i in range(0,len(fileNames),3):
     misCount = segment(imagename,csvfile,destinaton)
     totalMisCount += misCount
     print(str(int(i/3+1))+"/"+str(total)+" completed")
-    print("Time taken is ",t)
     print("misCount is ",misCount)
+    print("E.T.A: ",(total-(i/3+1))*2,"seconds")
+
     delete_last_lines(3)
     t = time() - t
 totalTime = time() - totalTime
 print("Total time taken: ",totalTime)
 print("Total misCount is ",totalMisCount)
+print("Creating Pickle")
+folder = '../../segmented_data/'
+pickleDestination = "../../processed_dataset/dataset2.pkl"
+create_pickle(folder,pickleDestination)
+print("pickle created")

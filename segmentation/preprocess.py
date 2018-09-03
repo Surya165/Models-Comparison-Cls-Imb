@@ -85,7 +85,7 @@ def otsu(img):
 def preprocess(img):
     #print("Creating Blue Ratio Histogram")
     img = blueRatioHistogram(img)
-    cv.imwrite('brh.jpg',img)
+    #cv.imwrite('brh.jpg',img)
     #print("Calculating Otsu Threshold")
     threshold = otsu(img)
     #print('Global Thresholding')
