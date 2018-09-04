@@ -53,6 +53,6 @@ print("Total time taken: ",totalTime)
 print("Total misCount is ",totalMisCount)
 print("Creating Pickle")
 folder = '../../segmented_data/'
-pickleDestination = "../../processed_dataset/dataset2.pkl"
+pickleDestination = "../../processed_dataset/"
 create_pickle(folder,pickleDestination)
 print("pickle created")
