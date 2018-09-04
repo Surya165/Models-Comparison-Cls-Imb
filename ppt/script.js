@@ -65,7 +65,8 @@ function drag(ev){
 function drop(ev){
   ev.preventDefault();
   data = ev.dataTransfer.getData("text");
-  data = data.substring(22, data.length);
+  data = data.substring(26, data.length);
+
   ev.target.src=data;
 }
 
@@ -75,4 +76,18 @@ function runs(){
   var z = document.createElement("img");
   z.src=data;
   di.appendChild(z);
+}
+
+function loadDoc() {
+  var image = document.getElementById('div1');
+  var src = image.src;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "example.php?image="+src, true);
+  xhttp.send();
 }

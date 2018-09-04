@@ -4,11 +4,12 @@ body{
 h1{
   text-align: center;
 }
-h1,h2,p{
+h1,h2,p,ul{
   color: white;
 }
 h2{
   border-width: 1px;
+  line-height: 35px;
   border-style: solid;
   border-color: white;
   border-radius: 5px;
@@ -16,10 +17,10 @@ h2{
   font-size: 40px;
   padding: 10px;
 }
-#encode,#ada,#crsl,#button{
+.ppt,#crsl{
   display: None;
 }
-#encode,#ada,#intro,#button{
+.ppt,#intro,#button{
   letter-spacing: 2px;
   line-height: 30px;
   word-spacing: 3px;
@@ -46,22 +47,19 @@ h2{
   top:0px;
   overflow:auto;
 }
-textarea{
-  position:fixed;
-  left:200px;
-}
+
 #div1{
-  left:320px;
-  bottom:60px;
+  left:170px;
+  bottom:55px;
   position: fixed;
   width:100px;
   height:100px;
   background-color: white;
 }
-#butt{
+#butt,#input{
   position:fixed;
-  left:334px;
-  bottom:20px;
+  left:180px;
+  bottom:10px;
   border-style:solid;
   border-radius:5px;
   padding-left: 6px;
@@ -69,7 +67,7 @@ textarea{
   padding-top: 3px;
   padding-bottom: 3px;
 }
-#butt:hover{
+#butt:hover,#input:hover{
   background-color: white;
   color:black;
 }
@@ -94,3 +92,19 @@ img{
   left:350px;
   top:10px;
 }
+pre{
+  color:white;
+}
+
+.fraction {
+    display:inline-block;
+    vertical-align: middle;
+    margin: 0 0.2em 0.4ex;
+    text-align: center;
+}
+.fraction > span {
+    display: block;
+    padding-top: 0.15em;
+}
+.fraction span.fdn {border-top: thin solid black;}
+.fraction span.bar {display: None;}
