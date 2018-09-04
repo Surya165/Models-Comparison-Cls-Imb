@@ -46,13 +46,17 @@ def create_pickle(folder,pickleDestination):
         non_mitotic_files = filenames
         break
     mx_train,my_train,mx_test,my_test = get_data(folder,0,1,mitotic_files,di)
+    m_dataset = (mx_train,mx_test)
     nx_train,ny_train,nx_test,ny_test = get_data(folder,1,0,non_mitotic_files,di)
+    n_dataset= (nx_train,nx_test)
+    pkl.dump(m_dataset,open(pickleDestination+"mitotic.pkl","wb"))
+    pkl.dump(n_dataset,open(pickleDestination+"non_mitotic.pkl","wb"))
     x_train = np.append(mx_train,nx_train,axis=0)
     y_train = np.append(my_train,ny_train,axis = 0)
     x_test = np.append(mx_test,nx_test,axis = 0)
     y_test = np.append(my_test,ny_test,axis = 0)
     dataset = ((x_train,y_train),(x_test,y_test))
-    pkl.dump(dataset,open(pickleDestination,"wb"))
+    pkl.dump(dataset,open(pickleDestination+"dataset2.pkl","wb"))
     return x_train,y_train,x_test,y_test
 '''
 folder = '../../segmented_data/'
