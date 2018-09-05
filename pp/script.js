@@ -1,6 +1,8 @@
 var list=["intro","encode","ada"];
 var pics = ["2.jpeg","3.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg"];
 var index=0;
+var fs = require('fs');
+var files = fs.readdirSync('./');
 var x=0;
 var data;
 /*function view(n){
@@ -10,6 +12,7 @@ var data;
 }*/
 
 function upload(){
+  alert(files)
   var y = document.getElementById("left-crsl");
   y.style.display="block";
   var div = document.getElementById("left-crsl");
