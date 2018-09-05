@@ -5,7 +5,7 @@ foreach (glob('../../dataset/A00_v2/*.jpg') as $filename) {
 }
 echo json_encode($out); ?>;
 
-var list=["intro","encode","ada"];
+var list=["intro","abstract","dataset","segment","brh","gbtuom","otsu","mo","ffl","wac","dio","dir","2pt","p1","km","aug","p2","f-m","adv","ada","impl","cs","encode","ocs"];
 //var pics = ["2.jpeg","3.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg"];
 var index=0;
 var fs = require('fs');
