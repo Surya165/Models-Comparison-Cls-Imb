@@ -1,8 +1,6 @@
 var list=["intro","encode","ada"];
 var pics = ["2.jpeg","3.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg","2.jpeg"];
-var index=0;
-var fs = require('fs');
-var files = fs.readdirSync('./');
+var index=-1;
 var x=0;
 var data;
 /*function view(n){
@@ -12,7 +10,6 @@ var data;
 }*/
 
 function upload(){
-  alert(files)
   var y = document.getElementById("left-crsl");
   y.style.display="block";
   var div = document.getElementById("left-crsl");
@@ -61,16 +58,14 @@ function allowDrop(ev){
 }
 
 function drag(ev){
-  console.log("dragiing");
   var x= ev.target.src;
   ev.dataTransfer.setData("text",x);
-
 }
 
 function drop(ev){
   ev.preventDefault();
   data = ev.dataTransfer.getData("text");
-  data = data.substring(17, data.length);
+  data = data.substring(26, data.length);
 
   ev.target.src=data;
 }
@@ -78,29 +73,21 @@ function drop(ev){
 //runs
 function runs(){
   var di = document.getElementById("right-crsl");
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function()
-  {
-    if(this.readyState == 4 && this.status == 200)
-    {
-      var z = document.createElement("img");
-      z.src=this.responseText;
-      z.onmouseover =function(event){
-          console.log("hi");
-          var yz = event.target.src;
-          //alert(yz);
-          var yx=document.getElementById("pop");
-          yx.style.display="block";
-          var yy=document.getElementById("pic");
-          yy.src=yz;
-      };
-      z.onmouseout=function () {
-        var xx=document.getElementById("pop");
-        xx.style.display="None";
-        };
-      di.appendChild(z);
+  var z = document.createElement("img");
+  z.src=data;
+  di.appendChild(z);
+}
+
+function loadDoc() {
+  var image = document.getElementById('div1');
+  var src = image.src;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
     }
-  }
-  xmlHttp.open("POST","blackandwhite.php?image=" + data,true);
-  xmlHttp.send();
+  };
+  xhttp.open("GET", "example.php?image="+src, true);
+  xhttp.send();
 }
