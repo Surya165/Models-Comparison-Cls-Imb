@@ -5,6 +5,12 @@ import os
 import cv2 as cv
 #print("2")
 import numpy as np
+from time import sleep
+def msg(message):
+    f = open('status.xml','w')
+    message = "<msg>"+message+"</msg>"
+    f.write(message)
+    f.close()
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 #print("3")
@@ -84,11 +90,15 @@ def otsu(img):
   return th
 def preprocess(img):
     #print("Creating Blue Ratio Histogram")
+    msg('calculating blue ratio histogram')
     img = blueRatioHistogram(img)
+
     #cv.imwrite('brh.jpg',img)
     #print("Calculating Otsu Threshold")
+    msg('calcualating otsu')
     threshold = otsu(img)
     #print('Global Thresholding')
+    msg('global threshold')
     img = globalThreshold(img,threshold)
     kernel = np.ones((3,3), np.uint8)
     img = img* 1.0

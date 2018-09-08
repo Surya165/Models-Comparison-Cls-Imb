@@ -3,7 +3,8 @@
 <head>
 <title> Model-Comparison-Cls-Imb</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.php"></script>
+<script src="script.js"></script>
+<script src="upload.php"></script>
 </head>
 <body onkeypress="change(event)">
   <h1> Models Comparison Class Imbalance</h1><br>

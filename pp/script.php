@@ -110,9 +110,13 @@ function readTextFile(file)
         {
             if(rawFile.status == 200 || rawFile.status == 0)
             {
-                var allText = rawFile.responseText;
+                //alert(file);
+
+                var allText = rawFile.responseXML;
+                msg = allText.getElementsByTagName('msg');
                 var p = document.getElementById('sts');
-                p.innerHTML = allText;
+
+                p.innerHTML = msg[0].childNodes[0].nodeValue;
 
             }
         }
@@ -122,13 +126,20 @@ function readTextFile(file)
 function runs(){
   var di = document.getElementById("right-crsl");
   var xmlHttp = new XMLHttpRequest();
+  var p = document.getElementById('sts');
+  p.innerHTML = 'connecting';
   xmlHttp.onreadystatechange = function()
   {
+    myVar = setInterval(function(){
+
+      readTextFile('status.xml');
+    }, 3);
     if(this.readyState == 4 && this.status == 200)
     {
-      myVar = setInterval(function(){
-        readTextFile('status');
-      }, 3000);
+
+
+
+      alert(this.responseText);
       /*var z = document.createElement("img");
       z.src=this.responseText;
       z.onmouseover =function(event){

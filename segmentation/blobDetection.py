@@ -4,9 +4,15 @@ import numpy
 import preprocess
 from console import delete_last_lines
 import sys
+from os import system
 pixelCount = 0
 from time import time
 from math import floor
+def msg(message):
+    f = open('status.xml','w')
+    message = "<msg>"+message+"</msg>"
+    f.write(message)
+    f.close()
 def getCentroids(blobsList):
 	#centroid creation
 	centroidList = []
@@ -83,7 +89,7 @@ def blobDetector(img):
 	detector = cv2.SimpleBlobDetector_create(params)
 	blobsList = []
 
-	img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+	img = cv2.imread("/var/www/html/image.jpg", cv2.IMREAD_GRAYSCALE)
 	keypoints = detector.detect(img)
 
 	#im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
@@ -99,8 +105,11 @@ def blobDetector(img):
 	return blobsList
 
 def segment(imageName):
-	img = cv2.imread(imageName)
-	img = preprocess.preprocess(img)
-	cv2.imwrite("image.jpg",img)
-	blobsList = blobDetector(img)
-	return blobsList
+    msg('reading image')
+    img = cv2.imread(imageName)
+    msg('preprocessing image')
+    img = preprocess.preprocess(img)
+    cv2.imwrite("/var/www/html/image.jpg",img)
+    msg('performing blob detection')
+    blobsList = blobDetector(img)
+    return blobsList
