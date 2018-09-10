@@ -22,7 +22,7 @@ def msg(message):
     message = "<msg>"+message+"</msg>"
     f.write(message)
     f.close()
-def segment(imagename,csvfile,destinaton):
+def segment(imagename,csvfile,destinaton,imagenumber=1,oversample=1):
     totalDataset = []
     msg('starting blobDetection and the image is '  + imagename)
     sleep(3)
@@ -49,21 +49,21 @@ def segment(imagename,csvfile,destinaton):
 	#print("Time taken for Labelling is " +str(t) + "secs")
     msg('creating image patches')
     t = time()
-    mitotic_imagelist = patch.patch(imagename,mitotic_list,True)
+    mitotic_imagelist = patch.patch(imagename,mitotic_list,True,oversample)
     nonmitotic_imagelist = patch.patch(imagename,nonmitotic_list,False)
     t = time() -t
 	#print("Time taken for patching images is " +str(t)+"secs")
     msg('saving images and the size is ')
     for i in range(len(mitotic_imagelist)):
-        address = "/var/www/html/Models-Comparison-Cls-Imb/pp/segmented_data/mitotic/img_"
-        address += str(mitotic_list[i][0])+"_"+str(mitotic_list[i][1]) + "_"
+        address = destinaton+'mitotic/img_'
+        address += str(imagenumber)+ "_"
         address +=  str(i) + ".jpg"
         cv.imwrite(address,mitotic_imagelist[i])
 
     for j in range(len(nonmitotic_imagelist)):
         d = str(nonmitotic_list[j])
-        address = "/var/www/html/Models-Comparison-Cls-Imb/pp/segmented_data/non_mitotic/img_"
-        address += str(nonmitotic_list[i][0])+"_"+str(nonmitotic_list[i][1]) + "_"
+        address = destinaton+'non_mitotic/img_'
+        address += str(imagenumber)+ "_"
         address +=  str(j) + ".jpg"
         #command = "mv "+address+" ./segmented_data/non_mitotic/"
         cv.imwrite(address,nonmitotic_imagelist[j])

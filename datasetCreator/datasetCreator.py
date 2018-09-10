@@ -36,18 +36,33 @@ totalMisCount = 0
 total = len(fileNames)/3
 print("Started Segmentation")
 totalTime = time()
-for i in range(0,len(fileNames),3):
+n = len(fileNames)
+avgTime = 0
+for i in range(0,n,3):
     imagename = fileNames[i]
     csvfile = fileNames[i+1]
     t = time()
-    misCount = segment(imagename,csvfile,destinaton)
+    misCount = segment(imagename,csvfile,destinaton,imagenumber=i,oversample=10 )
     totalMisCount += misCount
     print(str(int(i/3+1))+"/"+str(total)+" completed")
+    t = time() - t
+    t = round(t)
+    t = int(t)
+    avgTime *= (i/3)
+    avgTime += t
+    avgTime /= ((i/3) + 1)
     print("misCount is ",misCount)
-    print("E.T.A: ",(total-(i/3+1))*2,"seconds")
+    if(i == 0):
+        print("E.T.A: Estimating ....")
+    else:
+        eta = (total - (i/3)-1 )*avgTime
+        eta = int(round(eta))
+        mins = str(int(round(eta / 60)))
+        secs = str(eta % 60)
+        print("E.T.A: "+mins+"m"+secs+"s")
 
     delete_last_lines(3)
-    t = time() - t
+
 totalTime = time() - totalTime
 print("Total time taken: ",totalTime)
 print("Total misCount is ",totalMisCount)

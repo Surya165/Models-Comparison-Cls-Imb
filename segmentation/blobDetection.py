@@ -78,31 +78,29 @@ def floodFill(img,i,j,visited,recursionCount,blob):
 		return
 	return
 def blobDetector(img):
-	params = cv2.SimpleBlobDetector_Params()
-	params.filterByConvexity = False
-	params.filterByInertia = True
-	params.minInertiaRatio = 0.001
-	params.filterByArea = True
-	params.minArea = 15
-	params.filterByColor = True
-	params.blobColor = 255
-	detector = cv2.SimpleBlobDetector_create(params)
-	blobsList = []
-
-	img = cv2.imread("/var/www/html/image.jpg", cv2.IMREAD_GRAYSCALE)
-	keypoints = detector.detect(img)
+    params = cv2.SimpleBlobDetector_Params()
+    params.filterByConvexity = False
+    params.filterByInertia = True
+    params.minInertiaRatio = 0.001
+    params.filterByArea = True
+    params.minArea = 15
+    params.filterByColor = True
+    params.blobColor = 255
+    detector = cv2.SimpleBlobDetector_create(params)
+    blobsList = []
+    img = cv2.imread("/var/www/html/image.jpg", cv2.IMREAD_GRAYSCALE)
+    keypoints = detector.detect(img)
 
 	#im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-	blobslist = []
-	for i in range(len(keypoints)):
-		pt = keypoints[i].pt;
-		x = pt[1]
-		y = pt[0]
-		x = int(floor(x))
-		y = int(floor(y))
-		blobsList.append((x,y))
-
-	return blobsList
+    blobslist = []
+    for i in range(len(keypoints)):
+        pt = keypoints[i].pt
+        x = pt[1]
+        y = pt[0]
+        x = int(floor(x))
+        y = int(floor(y))
+        blobsList.append((x,y))
+    return blobsList
 
 def segment(imageName):
     msg('reading image')

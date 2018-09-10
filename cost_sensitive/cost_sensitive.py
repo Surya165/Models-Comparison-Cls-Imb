@@ -97,4 +97,4 @@ model.fit(x_train,y_train,
 	            verbose = 1,
 	            shuffle=True,
 	            validation_data=(x_test, y_test),class_weight=c_weights)
-model.save('cost_sensitive.h5')
+model.save('../cost_sensitive/cost_sensitive.h5')

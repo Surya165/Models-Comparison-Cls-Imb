@@ -8,7 +8,7 @@ def predict(pklAddress):
     y = np.append(y_train,y_test,axis=0)
     print(x.shape)
     print(y.shape)
-    model = load_model('cost_sensitive.h5')
+    model = load_model('../cost_sensitive/cost_sensitive.h5')
     y_pred = model.predict(x)
     l = []
     for i in y_pred:
@@ -34,5 +34,5 @@ def predict(pklAddress):
     print("fn",fn)
     print("fp",fp)
     return(tp,tn,fp,fn)
-pklAddress = '../../processed_dataset/dataset2.pkl'
-predict(pklAddress)
+#pklAddress = '../../processed_dataset/dataset2.pkl'
+#predict(pklAddress)

@@ -31,7 +31,7 @@ function upload(){
   }
 }
 
-function readTextFile(file)
+function readTextFile(file,isMessage)
 {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, true);
@@ -48,6 +48,7 @@ function readTextFile(file)
                 response = allText.getElementsByTagName('msg');
                 var p = document.getElementById('sts');
                 msg = response[0].childNodes[0].nodeValue;
+                if(isMessage==1)
                 p.innerHTML = msg;
 
             }
@@ -63,58 +64,7 @@ function runs(){
   p.innerHTML = 'connecting';
   xmlHttp.onreadystatechange = function()
   {
-    myVar = setInterval(function(){
-
-      var msg = readTextFile('status.xml');
-
-      var str = 'end';
-      if(msg == str)
-      {
-        clearInterval(myVar);
-        alert('Ending script');
-        for(var i in segmentedPics){
-          var z = document.createElement("img");
-          z.onmouseover =function(event){
-              console.log("hi");
-              var yz = event.target.src;
-              //alert(yz);
-              var yx=document.getElementById("pop");
-              yx.style.display="block";
-              var yy=document.getElementById("pic");
-              yy.src=yz;
-          };
-          z.onmouseout=function () {
-            var xx=document.getElementById("pop");
-            xx.style.display="None";
-            };
-          z.src='./segmented_data/non_mitotic/'+segmentedPics[i]+'.jpg';
-          z.zIndex = 200;
-          div.appendChild(z);
-        }
-      }
-    }, 3);
-
-    var y = document.getElementById("right-crsl");
-    y.style.display="block";
-    var div = document.getElementById("right-crsl");
-    if(this.readyState == 4 && this.status == 200)
-    {
-
-      //clearInterval(myVar);
-      var segmentedPics = <?php $out = array();
-      foreach (glob('./segmented_data/non_mitotic/*.jpg') as $filename) {
-          $p = pathinfo($filename);
-          $out[] = $p['filename'];
-      }
-      echo json_encode($out); ?>;
-
-
-      alert(this.responseText);
-
-
-
-
-      }
+    alert(this.responseText);
   }
   xmlHttp.open("POST","blackandwhite.php?image=" + data,true);
   xmlHttp.send();

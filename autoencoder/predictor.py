@@ -85,12 +85,12 @@ def test(folder):
         mx = np.append(mx_train,mx_test,axis = 0)
         nx = np.append(nx_train,nx_test,axis = 0)
 
-        mitoticModel = load_model('mitoticModel.h5')
-        non_mitoticModel = load_model('nonMitoticModel.h5')
+        mitoticModel = load_model('../autoencoder/mitoticModel.h5')
+        non_mitoticModel = load_model('../autoencoder/nonMitoticModel.h5')
         print(mx.shape)
         x_true,y_true = getDistances(mitoticModel,non_mitoticModel,mx,nx)
         print(x_true.shape,y_true.shape)
-        predictor = load_model('predictor.h5')
+        predictor = load_model('../autoencoder/predictor.h5')
         y_pred = predictor.predict(x_true)
 
         y_pred = np.argmax(y_pred,axis=1)
@@ -111,4 +111,4 @@ def test(folder):
                 tn += 1
         #predictor.save('predictor.h5')
         return (tp,tn,fp,fn)
-tp,tn,fp,fn = test('../../processed_dataset/')
+#tp,tn,fp,fn = test('../../processed_dataset/')

@@ -32,7 +32,7 @@ def get_model():
     decoded = Conv2D(3, (3, 3), activation='sigmoid', padding='same')(x)
 
     autoencoder = Model(input_img, decoded)
-    autoencoder.compile(optimizer=adam, loss='mean_squared_error')
+    autoencoder.compile(optimizer='rmsprop', loss='binary_crossentropy')
     return autoencoder
 
 def trainModel(model,mx_train,mx_test,name):
