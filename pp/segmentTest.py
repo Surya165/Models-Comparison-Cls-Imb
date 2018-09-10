@@ -1,7 +1,7 @@
 
 #!/home/rathod/.local/lib/python3.5/site-packages
 def msg(message):
-    f = open('logs.xml','w')
+    f = open('status.xml','w')
     message = "<msg>"+message+"</msg>"
     f.write(message)
     f.close()
